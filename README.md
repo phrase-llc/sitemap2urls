@@ -9,6 +9,19 @@ This tool recursively follows sitemap indexes and outputs all final URLs.
 
 ---
 
+## Requirements
+
+- Ruby 3.x or later
+- Bundler (`gem install bundler` if not installed)
+
+Install dependencies:
+
+```bash
+bundle install
+```
+
+---
+
 ## Usage
 
 ```bash

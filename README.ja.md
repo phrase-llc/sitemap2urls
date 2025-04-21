@@ -8,6 +8,19 @@ WordPressでは、最初の`sitemap.xml`に個別のサイトマップ（例：`
 
 ---
 
+## 必要環境
+
+- Ruby 3.x 以降
+- Bundler (`gem install bundler`)
+
+依存ライブラリのインストール:
+
+```bash
+bundle install
+```
+
+---
+
 ## 使い方
 
 ```bash
