@@ -8,63 +8,119 @@ WordPressでは、最初の`sitemap.xml`に個別のサイトマップ（例：`
 
 ---
 
-## 必要環境
+## Docker Compose での実行方法（推奨）
+
+ローカルに Ruby をインストールせずにすぐ実行したい場合は、Docker Compose を使う方法が便利です。
+
+### 前提条件
+
+- [Docker](https://www.docker.com/) がインストールされていること
+- `docker compose` コマンドが使えること（Docker Compose v2 以降）
+
+### 依存関係のインストール
+
+初回は下記コマンドで依存関係（Nokogiriなど）をインストールしてください：
+
+```bash
+docker compose run --rm cli bundle install
+```
+
+### スクリプトの基本実行
+
+```bash
+docker compose run --rm cli https://example.com/sitemap.xml
+```
+
+標準出力をファイルに保存する場合：
+
+```bash
+docker compose run --rm cli https://example.com/sitemap.xml > urls.txt
+```
+
+### よく使う実行例
+
+#### ログ（Fetching:）を表示する：
+
+```bash
+docker compose run --rm cli --verbose https://example.com/sitemap.xml
+```
+
+#### タイムアウトを変更する：
+
+```bash
+docker compose run --rm cli --open-timeout 3 --read-timeout 5 https://example.com/sitemap.xml
+```
+
+#### すべてのオプションを組み合わせて、出力をファイルに保存：
+
+```bash
+docker compose run --rm cli --verbose --open-timeout 5 https://example.com/sitemap.xml > urls.txt
+```
+
+#### エラーメッセージを別ファイルに保存する：
+
+```bash
+docker compose run --rm cli --verbose https://example.com/sitemap.xml > urls.txt 2> errors.log
+```
+
+> ※ 使用可能なオプションについては、後述の「共通オプション一覧」を参照してください。
+
+---
+
+## Ruby での実行方法（ローカルに環境がある場合）
+
+Ruby 環境がある場合は、通常の方法でスクリプトを実行できます。
+
+### 必要環境
 
 - Ruby 3.x 以降
-- Bundler (`gem install bundler`)
+- Bundler（`gem install bundler`）
 
-依存ライブラリのインストール:
+### 依存ライブラリのインストール
 
 ```bash
 bundle install
 ```
 
----
-
-## 使い方
-
-```bash
-ruby sitemap2urls.rb [オプション] https://example.com/sitemap.xml
-```
-
-### オプション
-
-| オプション | 説明 |
-|:---|:---|
-| `--verbose` | 「Fetching: URL」ログを表示する |
-| `--open-timeout 秒数` | 接続タイムアウトを設定する（デフォルト5秒） |
-| `--read-timeout 秒数` | 読み取りタイムアウトを設定する（デフォルト10秒） |
-
-### 使用例
-
-基本的な使い方（URLのみを出力）:
+### スクリプトの実行
 
 ```bash
 ruby sitemap2urls.rb https://example.com/sitemap.xml
 ```
 
-ログも表示する場合:
-
-```bash
-ruby sitemap2urls.rb --verbose https://example.com/sitemap.xml
-```
-
-URLをファイルに保存する場合:
+標準出力をファイルに保存する場合：
 
 ```bash
 ruby sitemap2urls.rb https://example.com/sitemap.xml > urls.txt
 ```
 
-標準出力と標準エラー出力を分離する場合:
+#### よく使う実行例
 
 ```bash
+ruby sitemap2urls.rb --verbose https://example.com/sitemap.xml
+ruby sitemap2urls.rb --open-timeout 3 --read-timeout 5 https://example.com/sitemap.xml
+ruby sitemap2urls.rb --verbose --open-timeout 5 https://example.com/sitemap.xml > urls.txt
 ruby sitemap2urls.rb --verbose https://example.com/sitemap.xml > urls.txt 2> errors.log
 ```
+
+> ※ 使用可能なオプションについては、後述の「共通オプション一覧」を参照してください。
+
+---
+
+## 共通オプション一覧
+
+以下のオプションは、Docker Compose でもローカルの Ruby 実行でも共通で使用できます。
+
+| オプション               | 説明                     |
+|:--------------------|:-----------------------|
+| `--verbose`         | 処理中のURLを表示するログを出力      |
+| `--open-timeout 秒数` | 接続タイムアウトを秒数で指定（例：5）    |
+| `--read-timeout 秒数` | 読み取りタイムアウトを秒数で指定（例：10） |
 
 ---
 
 ## ライセンス
 
-このプロジェクトは [MIT License](LICENSE) の下でライセンスされています。
+このプロジェクトは [MIT License](https://github.com/phrase-llc/sitemap2urls/blob/main/LICENSE) のもとで公開されています。
 
 ---

@@ -1,0 +1,7 @@
+services:
+  cli:
+    image: ruby:3.4
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: ruby sitemap2urls.rb
