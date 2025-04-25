@@ -1,6 +1,6 @@
 # sitemap2urls
 
-https://github.com/phrase-llc/sitemap2urls
+https://phrase-llc.github.io/sitemap2urls/
 
 WordPressの `sitemap.xml` から、すべてのURLを再帰的に取得するツールです。
 

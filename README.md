@@ -1,6 +1,6 @@
 # sitemap2urls
 
-https://github.com/phrase-llc/sitemap2urls
+https://phrase-llc.github.io/sitemap2urls/
 
 A CLI tool to recursively fetch all URLs from a WordPress `sitemap.xml`.
 
