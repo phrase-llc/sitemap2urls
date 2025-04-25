@@ -19,6 +19,8 @@ docker build -t sitemap2urls .
 docker run --rm sitemap2urls https://example.com/sitemap.xml > urls.txt
 ```
 
+`urls.txt` にURLが出力されます。ファイル名を変更したい場合は、`urls.txt` の部分を変更してください。
+
 その他、使えるオプションや Ruby での実行方法については  
 [GitHub の README（日本語）](https://github.com/phrase-llc/sitemap2urls/blob/main/README.ja.md) をご覧ください。
 
@@ -39,6 +41,8 @@ cd sitemap2urls
 docker build -t sitemap2urls .
 docker run --rm sitemap2urls https://example.com/sitemap.xml > urls.txt
 ```
+
+`urls.txt` will contain the output. You can change the filename by modifying `urls.txt`.
 
 For advanced options and local Ruby usage,  
 please refer to the [README on GitHub](https://github.com/phrase-llc/sitemap2urls/blob/main/README.md).
