@@ -9,59 +9,47 @@ This tool recursively traverses those sitemaps and outputs all final URLs to sta
 
 ---
 
-## Run with Docker Compose (Recommended)
+## Quick Start with Docker (Recommended)
 
-You can run this tool without installing Ruby locally by using Docker Compose.
+You can run this tool using only Docker — no Ruby or Bundler installation required.
 
-### Requirements
-
-- [Docker](https://www.docker.com/)
-- Docker Compose v2+ (`docker compose` command available)
-
-### Install dependencies
-
-On first run, install dependencies such as Nokogiri:
+### 1. Clone this repository
 
 ```bash
-docker compose run --rm cli bundle install
+git clone https://github.com/phrase-llc/sitemap2urls.git
+cd sitemap2urls
 ```
 
-### Basic usage
+### 2. Build the Docker image
 
 ```bash
-docker compose run --rm cli https://example.com/sitemap.xml
+docker build -t sitemap2urls .
+```
+
+### 3. Run the script
+
+Replace `https://example.com/sitemap.xml` with the actual URL you want to fetch.
+
+```bash
+docker run --rm sitemap2urls https://example.com/sitemap.xml
 ```
 
 To save the output to a file:
 
 ```bash
-docker compose run --rm cli https://example.com/sitemap.xml > urls.txt
+docker run --rm sitemap2urls https://example.com/sitemap.xml > urls.txt
 ```
 
-### Common usage examples
-
-#### Show fetching logs:
+To show fetching logs:
 
 ```bash
-docker compose run --rm cli --verbose https://example.com/sitemap.xml
+docker run --rm sitemap2urls --verbose https://example.com/sitemap.xml
 ```
 
-#### Customize timeouts:
+To customize timeout settings:
 
 ```bash
-docker compose run --rm cli --open-timeout 3 --read-timeout 5 https://example.com/sitemap.xml
-```
-
-#### Combine options and save to file:
-
-```bash
-docker compose run --rm cli --verbose --open-timeout 5 https://example.com/sitemap.xml > urls.txt
-```
-
-#### Separate stdout and stderr:
-
-```bash
-docker compose run --rm cli --verbose https://example.com/sitemap.xml > urls.txt 2> errors.log
+docker run --rm sitemap2urls --open-timeout 5 --read-timeout 10 https://example.com/sitemap.xml
 ```
 
 > See [Shared Options](#shared-options) for available command-line flags.
@@ -84,6 +72,8 @@ bundle install
 ```
 
 ### Basic usage
+
+Replace `https://example.com/sitemap.xml` with the actual URL you want to fetch.
 
 ```bash
 ruby sitemap2urls.rb https://example.com/sitemap.xml
@@ -122,6 +112,5 @@ The following command-line options are available in both Docker and Ruby executi
 
 ## License
 
-This project is licensed under the [MIT License](https://github.com/phrase-llc/sitemap2urls/blob/main/LICENSE).
-
----
+This project is licensed under the [MIT License](https://github.com/phrase-llc/sitemap2urls/blob/main/LICENSE).  
+Maintained by [Phrase Inc.](https://www.phrase-inc.com)

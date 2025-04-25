@@ -8,59 +8,45 @@ WordPressでは、最初の`sitemap.xml`に個別のサイトマップ（例：`
 
 ---
 
-## Docker Compose での実行方法（推奨）
+## Docker を使った実行方法（推奨）
 
-ローカルに Ruby をインストールせずにすぐ実行したい場合は、Docker Compose を使う方法が便利です。
-
-### 前提条件
-
-- [Docker](https://www.docker.com/) がインストールされていること
-- `docker compose` コマンドが使えること（Docker Compose v2 以降）
-
-### 依存関係のインストール
-
-初回は下記コマンドで依存関係（Nokogiriなど）をインストールしてください：
+### 1. このリポジトリをクローン
 
 ```bash
-docker compose run --rm cli bundle install
+git clone https://github.com/phrase-llc/sitemap2urls.git
+cd sitemap2urls
 ```
 
-### スクリプトの基本実行
+### 2. Docker イメージをビルド
 
 ```bash
-docker compose run --rm cli https://example.com/sitemap.xml
+docker build -t sitemap2urls .
 ```
 
-標準出力をファイルに保存する場合：
+### 3. スクリプトを実行
+
+`https://example.com/sitemap.xml` の部分を実際のURLに置き換えて実行してください。
 
 ```bash
-docker compose run --rm cli https://example.com/sitemap.xml > urls.txt
+docker run --rm sitemap2urls https://example.com/sitemap.xml
 ```
 
-### よく使う実行例
-
-#### ログ（Fetching:）を表示する：
+出力をファイルに保存したい場合：
 
 ```bash
-docker compose run --rm cli --verbose https://example.com/sitemap.xml
+docker run --rm sitemap2urls https://example.com/sitemap.xml > urls.txt
 ```
 
-#### タイムアウトを変更する：
+ログを表示したい場合：
 
 ```bash
-docker compose run --rm cli --open-timeout 3 --read-timeout 5 https://example.com/sitemap.xml
+docker run --rm sitemap2urls --verbose https://example.com/sitemap.xml
 ```
 
-#### すべてのオプションを組み合わせて、出力をファイルに保存：
+タイムアウト設定を変更したい場合：
 
 ```bash
-docker compose run --rm cli --verbose --open-timeout 5 https://example.com/sitemap.xml > urls.txt
-```
-
-#### エラーメッセージを別ファイルに保存する：
-
-```bash
-docker compose run --rm cli --verbose https://example.com/sitemap.xml > urls.txt 2> errors.log
+docker run --rm sitemap2urls --open-timeout 5 --read-timeout 10 https://example.com/sitemap.xml
 ```
 
 > ※ 使用可能なオプションについては、後述の「共通オプション一覧」を参照してください。
@@ -83,6 +69,8 @@ bundle install
 ```
 
 ### スクリプトの実行
+
+`https://example.com/sitemap.xml` の部分を実際のURLに置き換えて実行してください。
 
 ```bash
 ruby sitemap2urls.rb https://example.com/sitemap.xml
@@ -121,6 +109,5 @@ ruby sitemap2urls.rb --verbose https://example.com/sitemap.xml > urls.txt 2> err
 
 ## ライセンス
 
-このプロジェクトは [MIT License](https://github.com/phrase-llc/sitemap2urls/blob/main/LICENSE) のもとで公開されています。
-
----
+このプロジェクトは [MIT License](https://github.com/phrase-llc/sitemap2urls/blob/main/LICENSE) のもとで公開されています。  
+[株式会社フレイズ](https://www.phrase-inc.com)
