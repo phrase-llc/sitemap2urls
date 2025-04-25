@@ -66,3 +66,13 @@ docker compose run --rm cli https://example.com/sitemap.xml > urls.txt
 
 For advanced options and local Ruby usage,  
 please refer to the [README on GitHub](https://github.com/phrase-llc/sitemap2urls/blob/main/README.md).
+
+---
+
+## Credits
+<a href="https://www.phrase-inc.com" target="_blank">
+  <img src="logo-c.svg" alt="Phrase Inc." style="max-width: 480px;" />
+</a>
+
+Maintained by [Phrase Inc.](https://www.phrase-inc.com)  
+Vectors and icons by <a href="https://www.svgrepo.com" target="_blank">SVG Repo</a>
